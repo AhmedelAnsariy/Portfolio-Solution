@@ -17,7 +17,8 @@ namespace Portfolio.Core.Models
         public string Rate { get; set; }
 
        public string? BackupQuestion { get; set; }
-        public string Description { get; set; }
+       public string Description { get; set; }
+
 
 
 
