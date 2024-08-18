@@ -1,19 +1,33 @@
+using Microsoft.EntityFrameworkCore;
+using Portfolio.Repository.Data;
+
 namespace Portfolio.API
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var webApplicationbuilder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
 
-            builder.Services.AddControllers();
+
+            webApplicationbuilder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            webApplicationbuilder.Services.AddEndpointsApiExplorer();
+            webApplicationbuilder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
+
+
+            webApplicationbuilder.Services.AddDbContext<DataDbContext>(options =>
+            {
+                options.UseSqlServer(webApplicationbuilder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+
+
+
+
+            var app = webApplicationbuilder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

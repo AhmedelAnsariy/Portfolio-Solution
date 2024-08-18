@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Portfolio.Core.Models
 {
-    public class EvaluationMonthly
+    public class EvaluationMonthly : BaseClass
     {
         public bool ActiveRate { get; set; }
 
