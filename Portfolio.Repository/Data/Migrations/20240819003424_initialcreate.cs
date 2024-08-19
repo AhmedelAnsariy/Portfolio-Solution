@@ -96,6 +96,7 @@ namespace Portfolio.Repository.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -137,5 +138,3 @@ namespace Portfolio.Repository.Data.Migrations
         }
     }
 }
-
-

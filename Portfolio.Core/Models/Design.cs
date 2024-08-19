@@ -12,6 +12,8 @@ namespace Portfolio.Core.Models
 
         public string PictureUrl { get; set; }
 
+        public string? Link { get; set; }
+
 
 
         public Category Category { get; set; }

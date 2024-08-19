@@ -11,7 +11,7 @@ using Portfolio.Repository.Data;
 namespace Portfolio.Repository.Data.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20240818024644_initialcreate")]
+    [Migration("20240819003424_initialcreate")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,6 +137,9 @@ namespace Portfolio.Repository.Data.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
