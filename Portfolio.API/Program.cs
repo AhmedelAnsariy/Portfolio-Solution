@@ -39,6 +39,7 @@ namespace Portfolio.API
             try
             {
                 await _context.Database.MigrateAsync();
+                await DataDbContextSeed.SeedAsync(_context);
             }catch (Exception ex)
             {
                 var loogger = loggerFactory.CreateLogger<Program>();
