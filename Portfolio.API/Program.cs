@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Portfolio.API.Helper;
 using Portfolio.Core.Interfaces;
 using Portfolio.Repository.Data;
 using Portfolio.Repository.Repositories;
@@ -28,7 +29,7 @@ namespace Portfolio.API
 
             webApplicationbuilder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             webApplicationbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            webApplicationbuilder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 
 

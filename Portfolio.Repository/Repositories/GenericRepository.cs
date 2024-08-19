@@ -21,8 +21,12 @@ namespace Portfolio.Repository.Repositories
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-           var data = await _context.Set<T>().ToListAsync();
-            return data;
+            if (typeof(T) == typeof(Design))
+            {
+                var data = await _context.Set<Design>().Include(d => d.Category).ToListAsync();
+                return data as List<T>;
+            }
+            return await _context.Set<T>().ToListAsync();
         }
 
 
