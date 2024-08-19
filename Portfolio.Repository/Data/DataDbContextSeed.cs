@@ -26,6 +26,60 @@ namespace Portfolio.Repository.Data
                     await _context.SaveChangesAsync();
                 }
             }
+
+
+            if (_context.Categories.Count() == 0)
+            {
+                var categories = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/category.json");
+
+
+                var categoriesData = JsonSerializer.Deserialize<List<Category>>(categories);
+
+                if (categoriesData?.Count > 0)
+                {
+                    foreach (var cat in categoriesData)
+                    {
+                        _context.Set<Category>().Add(cat);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+
+
+
+
+
+            if (_context.Designs.Count() == 0)
+            {
+                var designs = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/designs.json");
+
+
+
+
+                var designsData = JsonSerializer.Deserialize<List<Design>>(designs);
+
+
+
+
+                if (designsData?.Count > 0)
+                {
+                    foreach (var  des in designsData)
+                    {
+                        _context.Set<Design>().Add(des);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+
+
+
+
+
+
+
+
         }
     }
 }

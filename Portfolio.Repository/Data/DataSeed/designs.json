@@ -1,0 +1,97 @@
+[
+  {
+    "Name": "Bvb 1",
+    "PictureUrl": "images/bvb/b1.jpeg",
+    "CategoryId":1
+  },
+
+
+  {
+    "Name": "Bvb 2",
+    "PictureUrl": "images/bvb/b2.jpeg",
+    "CategoryId":1
+  },
+
+  {
+    "Name": "Bvb 3",
+    "PictureUrl": "images/bvb/b3.png",
+    "CategoryId":1
+  },
+
+
+  {
+    "Name": "Bvb 4",
+    "PictureUrl": "images/bvb/b4.png",
+    "CategoryId":1
+  },
+
+  {
+    "Name": "Bvb 5",
+    "PictureUrl": "images/bvb/b5.png",
+    "CategoryId":1
+  },
+
+
+
+
+
+
+
+  {
+    "Name": "ATM 1",
+    "PictureUrl": "images/atm/a1.png",
+    "CategoryId":2
+  },
+
+
+  {
+    "Name": "ATM 2",
+    "PictureUrl": "images/atm/a2.png",
+    "CategoryId":2
+  },
+
+  {
+    "Name": "ATM 3",
+    "PictureUrl": "images/atm/a3.png",
+    "CategoryId":2
+  },
+
+
+
+
+  {
+    "Name": "FLAMENGO 1",
+    "PictureUrl": "images/flamengo/f1.jpeg",
+    "CategoryId":3
+  },
+
+
+
+  {
+    "Name": "FLAMENGO 2",
+    "PictureUrl": "images/flamengo/f2.png",
+    "CategoryId":3
+  },
+
+
+
+  {
+    "Name": "FLAMENGO 3",
+    "PictureUrl": "images/flamengo/f3.png",
+    "CategoryId":3
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]
