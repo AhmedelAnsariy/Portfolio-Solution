@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Portfolio.Core.Interfaces;
 using Portfolio.Repository.Data;
+using Portfolio.Repository.Repositories;
 
 namespace Portfolio.API
 {
@@ -22,6 +24,10 @@ namespace Portfolio.API
             {
                 options.UseSqlServer(webApplicationbuilder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+
+            webApplicationbuilder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            webApplicationbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 
