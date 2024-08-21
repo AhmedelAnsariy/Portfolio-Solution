@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.API.Errors;
 using Portfolio.API.Helper;
+using Portfolio.API.Middlewares;
 using Portfolio.Core.Interfaces;
 using Portfolio.Repository.Data;
 using Portfolio.Repository.Repositories;
@@ -73,13 +74,15 @@ namespace Portfolio.API
                 loogger.LogError(ex, "Error in Update Database");
             }
 
+            app.UseMiddleware<ExceptionMiddleware>(); // For Validation 
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
-
+            } 
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");  //For Not Found End Point 
             app.UseStaticFiles();
             app.UseHttpsRedirection();
 
