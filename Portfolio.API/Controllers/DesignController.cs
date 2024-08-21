@@ -33,9 +33,8 @@ namespace Portfolio.API.Controllers
 
             var data = await _unitOfWork.Repository<Design>().GetAllWithSpecAsync(spec);
 
-
-
             var mappedData = _mapper.Map<IReadOnlyList<Design>, IReadOnlyList<DesignToReturnDto>>(data);
+
 
             var response = new PagedResponse<DesignToReturnDto>
             {

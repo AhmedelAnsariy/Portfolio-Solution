@@ -68,7 +68,8 @@ namespace Portfolio.API
             {
                 await _context.Database.MigrateAsync();
                 await DataDbContextSeed.SeedAsync(_context);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 var loogger = loggerFactory.CreateLogger<Program>();
                 loogger.LogError(ex, "Error in Update Database");
