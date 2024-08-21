@@ -11,7 +11,8 @@ namespace Portfolio.API.Helper
         public MappingProfiles()
         {
             CreateMap<Design, DesignToReturnDto>()
-                .ForMember(d => d.Category, o => o.MapFrom(s => s.Category.Name));
+                .ForMember(d => d.Category, o => o.MapFrom(s => s.Category.Name))
+                 .ForMember(d => d.PictureUrl, o => o.MapFrom<DesignUrlResolver>());
         }
 
     }
