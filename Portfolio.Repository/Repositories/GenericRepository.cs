@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Portfolio.Core.Interfaces;
 using Portfolio.Core.Models;
+using Portfolio.Core.Specifications;
 using Portfolio.Repository.Data;
+using Portfolio.Repository.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +23,11 @@ namespace Portfolio.Repository.Repositories
 
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            if (typeof(T) == typeof(Design))
-            {
-                var data = await _context.Set<Design>().Include(d => d.Category).ToListAsync();
-                return data as List<T>;
-            }
+            //if (typeof(T) == typeof(Design))
+            //{
+            //    var data = await _context.Set<Design>().Include(d => d.Category).ToListAsync();
+            //    return data as List<T>;
+            //}
             return await _context.Set<T>().ToListAsync();
         }
 
@@ -40,6 +42,20 @@ namespace Portfolio.Repository.Repositories
             }
             return entity;
         }
+
+
+
+        public async Task<T?> GetWithSpecByIdAsync(ISpecifications<T> spec)
+        {
+           return await SpecificationsEvaluators<T>.GetQuery(_context.Set<T>() , spec).FirstOrDefaultAsync();
+        }
+
+        public async Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecifications<T> spec)
+        {
+            return await SpecificationsEvaluators<T>.GetQuery(_context.Set<T>(), spec).ToListAsync();
+        }
+
+
 
 
 
@@ -60,5 +76,7 @@ namespace Portfolio.Repository.Repositories
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

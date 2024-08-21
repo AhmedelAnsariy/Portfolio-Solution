@@ -5,6 +5,7 @@ using Portfolio.API.DTOS;
 using Portfolio.API.DTOS.Designs;
 using Portfolio.Core.Interfaces;
 using Portfolio.Core.Models;
+using Portfolio.Core.Specifications.DesignSpec;
 
 namespace Portfolio.API.Controllers
 {
@@ -25,7 +26,14 @@ namespace Portfolio.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<Design>>> GetAllDesing()
         {
-            var data = await _unitOfWork.Repository<Design>().GetAllAsync();
+
+            var spec = new DesignWithCategorySpec();
+
+
+            var data = await _unitOfWork.Repository<Design>().GetAllWithSpecAsync(spec);
+
+
+
             var mappedData = _mapper.Map<IReadOnlyList<Design>, IReadOnlyList<DesignToReturnDto>>(data);
 
             var response = new PagedResponse<DesignToReturnDto>
@@ -34,6 +42,9 @@ namespace Portfolio.API.Controllers
                 TotalCount = mappedData.Count
             };
             return Ok(response);
+
+
+
         }
 
 
