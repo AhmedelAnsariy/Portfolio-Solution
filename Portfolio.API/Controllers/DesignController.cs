@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.API.DTOS;
 using Portfolio.API.DTOS.Designs;
+using Portfolio.API.Errors;
 using Portfolio.Core.Interfaces;
 using Portfolio.Core.Models;
 using Portfolio.Core.Specifications.DesignSpec;
@@ -42,6 +43,32 @@ namespace Portfolio.API.Controllers
                 TotalCount = mappedData.Count
             };
             return Ok(response);
+
+
+
+        }
+
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Design> > GetDesignById(int id )
+        {
+
+            var spec = new DesignWithCategorySpec(id);
+
+
+            var data = await _unitOfWork.Repository<Design>().GetWithSpecByIdAsync(spec);
+
+            if(data is null)
+            {
+                return NotFound(new ApiResponse(StatusCodes.Status404NotFound, "Design Not Found"));
+            }
+
+
+            var mappedData = _mapper.Map<Design, DesignToReturnDto>(data);
+
+
+            return Ok(mappedData);
 
 
 

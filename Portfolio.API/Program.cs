@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Portfolio.API.Errors;
 using Portfolio.API.Helper;
 using Portfolio.Core.Interfaces;
 using Portfolio.Repository.Data;
@@ -30,6 +32,24 @@ namespace Portfolio.API
             webApplicationbuilder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             webApplicationbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             webApplicationbuilder.Services.AddAutoMapper(typeof(MappingProfiles));
+
+
+            webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
+         options.InvalidModelStateResponseFactory = (ActionContext context) =>
+    {
+        var errors = context.ModelState
+            .Where(p => p.Value.Errors.Any())
+            .SelectMany(p => p.Value.Errors)
+            .Select(e => e.ErrorMessage)
+            .ToArray();
+
+        var validateErrorResponse = new ApiValidationErrorResponse
+        {
+            Errors = errors
+        };
+
+        return new BadRequestObjectResult(validateErrorResponse);
+        });
 
 
 
