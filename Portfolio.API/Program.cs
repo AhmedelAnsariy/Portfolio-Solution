@@ -37,7 +37,7 @@ namespace Portfolio.API
 
             webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
          options.InvalidModelStateResponseFactory = (ActionContext context) =>
-    {
+         {
         var errors = context.ModelState
             .Where(p => p.Value.Errors.Any())
             .SelectMany(p => p.Value.Errors)
