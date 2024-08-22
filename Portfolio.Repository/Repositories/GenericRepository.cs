@@ -64,10 +64,16 @@ namespace Portfolio.Repository.Repositories
 
 
 
-        public Task<T> AddAsync(T entity)
+        public async Task<T> AddAsync(T entity)
         {
-            throw new NotImplementedException();
+           await _context.Set<T>().AddAsync(entity);
+            return entity;
         }
+
+
+
+
+
         public void Delete(T entity)
         {
             throw new NotImplementedException();

@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
-using Portfolio.API.DTOS.Designs;
+using Portfolio.API.DTOS.Client;
 using Portfolio.Core.Models;
 
 namespace Portfolio.API.Helper
 {
-    public class DesignUrlResolver : IValueResolver<Design, DesignToReturnDto, string>
+    public class ClientUrlResolver : IValueResolver<ClientReview, ClientToReturnDTO, string>
     {
+
         private readonly IConfiguration _configuration;
 
-        public DesignUrlResolver(IConfiguration configuration)
+        public ClientUrlResolver(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -17,9 +18,9 @@ namespace Portfolio.API.Helper
 
 
 
-        public string Resolve(Design source, DesignToReturnDto destination, string destMember, ResolutionContext context)
+        public string Resolve(ClientReview source, ClientToReturnDTO destination, string destMember, ResolutionContext context)
         {
-            if(!string.IsNullOrEmpty(source.PictureUrl))
+            if (!string.IsNullOrEmpty(source.PictureUrl))
             {
                 return $"{_configuration["baseurl"]}{source.PictureUrl}";
             }

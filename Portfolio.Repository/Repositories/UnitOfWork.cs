@@ -39,6 +39,8 @@ namespace Portfolio.Repository.Repositories
 
 
 
+
+
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseClass
         {
             var type = typeof(TEntity).Name;

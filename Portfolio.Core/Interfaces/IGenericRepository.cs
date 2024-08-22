@@ -21,6 +21,10 @@ namespace Portfolio.Core.Interfaces
 
 
         Task<T> AddAsync(T entity);
+
+
+
+
         void Delete(T entity);
         void Update(T entity);
 
