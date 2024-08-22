@@ -1,33 +1,33 @@
 [
   {
     "Name": "Bvb 1",
-    "PictureUrl": "images/BVB/b1.jpeg",
-    "CategoryId":1
+    "PictureUrl": "images/Designs/b1.jpeg",
+    "CategoryId": 1
   },
 
 
   {
     "Name": "Bvb 2",
-    "PictureUrl": "images/BVB/b2.jpeg",
+    "PictureUrl": "images/Designs/b2.jpeg",
     "CategoryId": 1
   },
 
   {
     "Name": "Bvb 3",
-    "PictureUrl": "images/BVB/b3.png",
+    "PictureUrl": "images/Designs/b3.png",
     "CategoryId": 1
   },
 
 
   {
     "Name": "Bvb 4",
-    "PictureUrl": "images/BVB/b4.png",
+    "PictureUrl": "images/Designs/b4.png",
     "CategoryId": 1
   },
 
   {
     "Name": "Bvb 5",
-    "PictureUrl": "images/BVB/b5.png",
+    "PictureUrl": "images/Designs/b5.png",
     "CategoryId": 1
   },
 
@@ -39,20 +39,20 @@
 
   {
     "Name": "ATM 1",
-    "PictureUrl": "images/ATM/a1.png",
-    "CategoryId":2
+    "PictureUrl": "images/Designs/a1.png",
+    "CategoryId": 2
   },
 
 
   {
     "Name": "ATM 2",
-    "PictureUrl": "images/ATM/a2.png",
+    "PictureUrl": "images/Designs/a2.png",
     "CategoryId": 2
   },
 
   {
     "Name": "ATM 3",
-    "PictureUrl": "images/ATM/a3.png",
+    "PictureUrl": "images/Designs/a3.png",
     "CategoryId": 2
   },
 
@@ -61,15 +61,15 @@
 
   {
     "Name": "FLAMENGO 1",
-    "PictureUrl": "images/Flamengo/f1.jpeg",
-    "CategoryId":3
+    "PictureUrl": "images/Designs/f1.jpeg",
+    "CategoryId": 3
   },
 
 
 
   {
     "Name": "FLAMENGO 2",
-    "PictureUrl": "images/Flamengo/f2.png",
+    "PictureUrl": "images/Designs/f2.png",
     "CategoryId": 3
   },
 
@@ -77,7 +77,7 @@
 
   {
     "Name": "FLAMENGO 3",
-    "PictureUrl": "images/Flamengo/f3.png",
+    "PictureUrl": "images/Designs/f3.png",
     "CategoryId": 3
   }
 
