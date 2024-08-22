@@ -26,6 +26,8 @@ namespace Portfolio.Core.Interfaces
 
 
         void Delete(T entity);
+
+
         void Update(T entity);
 
 

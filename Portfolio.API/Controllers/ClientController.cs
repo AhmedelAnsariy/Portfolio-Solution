@@ -8,6 +8,7 @@ using Portfolio.Core.Models;
 using Portfolio.API.DTOS.Client;
 using Portfolio.API.Helper;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Portfolio.API.Errors;
 
 namespace Portfolio.API.Controllers
 {
@@ -44,37 +45,7 @@ namespace Portfolio.API.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddNewDesign( [FromForm] ClientToCreateDTO clientDto)
-        //{
-        //    try
-        //    {
-        //        // Save the image using the FileHelper class
-        //        var imagePath = FileHelper.SaveFile(clientDto.PictureUrl, _environment.WebRootPath, "uploads");
-
-        //        // Create a new Design object
-        //        var client = new ClientReview
-        //        {
-        //            Name = clientDto.Name,
-        //            Description = clientDto.Description,
-        //            Company = clientDto.Company,
-        //            PictureUrl = imagePath
-        //        };
-
-        //        //return Ok(new { message = "Design added successfully!" });
-
-        //        _unitOfWork.Repository<ClientReview>().AddAsync(client);
-
-        //        return Ok(client);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(new { message = ex.Message });
-        //    }
-        //}
-
-
+      
 
         [HttpPost]
         public async Task<IActionResult> AddNewDesign([FromForm] ClientToCreateDTO clientDto)
@@ -108,6 +79,48 @@ namespace Portfolio.API.Controllers
 
 
         }
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteClient(int id)
+        {
+            var oneClient = await _unitOfWork.Repository<ClientReview>().GetByIdAsync(id);  
+            if (oneClient == null)
+            {
+                return NotFound(new ApiResponse(404, "There is no client with this ID"));
+            }
+
+            string imageFileName = Path.GetFileName(oneClient.PictureUrl); 
+            var imagePath = Path.Combine("wwwroot/images/clients", imageFileName);
+            var fileHelper = new FileHelper();
+            var isDeleted = fileHelper.DeleteDocument(imagePath);
+
+            if (!isDeleted)
+            {
+                return StatusCode(500, "An error occurred while deleting the client's image. Please check the server logs for details.");
+            }
+            _unitOfWork.Repository<ClientReview>().Delete(oneClient);
+            var result = await _unitOfWork.CompleteAsync();
+            if (result > 0)
+            {
+                return Ok(new { status = 200, message = "Client and image successfully deleted from your system" });
+            }
+            else
+            {
+                return StatusCode(500, "An error occurred while deleting the client");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

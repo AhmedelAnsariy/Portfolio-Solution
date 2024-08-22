@@ -30,5 +30,30 @@
 
 
 
+        public bool DeleteDocument(string filePath)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    return true;
+                }
+                return false; // File not found
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details
+                Console.WriteLine($"Exception occurred while deleting file: {ex.Message}");
+                return false;
+            }
+        }
+
+
+
+
+
+
+
     }
 }
