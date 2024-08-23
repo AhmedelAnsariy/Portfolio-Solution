@@ -32,6 +32,14 @@ namespace Portfolio.API.Helper
 
 
 
+            CreateMap<DesignToAddDTO,Design>()
+                .ForMember(dest =>dest.PictureUrl, opt => opt.Ignore());
+
+
+
+
+
+
 
         }
 

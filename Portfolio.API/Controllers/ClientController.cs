@@ -102,6 +102,8 @@ namespace Portfolio.API.Controllers
             {
                 return StatusCode(500, "An error occurred while deleting the client's image. Please check the server logs for details.");
             }
+
+
             _unitOfWork.Repository<ClientReview>().Delete(oneClient);
             var result = await _unitOfWork.CompleteAsync();
             if (result > 0)
