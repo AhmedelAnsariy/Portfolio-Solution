@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Portfolio.API.DTOS.Career;
 using Portfolio.API.DTOS.Category;
 using Portfolio.API.DTOS.Client;
+using Portfolio.API.DTOS.Contact;
 using Portfolio.API.DTOS.Designs;
 using Portfolio.Core.Models;
 
@@ -35,6 +37,15 @@ namespace Portfolio.API.Helper
             CreateMap<DesignToAddDTO,Design>()
                 .ForMember(dest =>dest.PictureUrl, opt => opt.Ignore());
 
+            CreateMap<ContactDTO,Contact>().ReverseMap();
+
+            CreateMap<Contact, ContactToReturnDTO>();
+
+
+
+            CreateMap<Career, CareerDTO>().ReverseMap();
+
+            CreateMap<Career, CareerToReturnDTO>(); ;
 
 
 

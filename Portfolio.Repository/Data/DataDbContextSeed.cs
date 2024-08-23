@@ -74,6 +74,24 @@ namespace Portfolio.Repository.Data
 
 
 
+            if(_context.Careers.Count() == 0)
+            {
+                var careers = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/career.json");
+                var careerData = JsonSerializer.Deserialize<List<Career>>(careers);
+
+
+
+
+                if (careerData?.Count > 0)
+                {
+                    foreach (var car in careerData)
+                    {
+                        _context.Set<Career>().Add(car);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+
 
 
 
