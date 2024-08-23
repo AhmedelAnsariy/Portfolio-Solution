@@ -85,6 +85,8 @@ namespace Portfolio.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteClient(int id)
         {
+
+
             var oneClient = await _unitOfWork.Repository<ClientReview>().GetByIdAsync(id);  
             if (oneClient == null)
             {
@@ -110,6 +112,9 @@ namespace Portfolio.API.Controllers
             {
                 return StatusCode(500, "An error occurred while deleting the client");
             }
+
+
+
         }
 
 

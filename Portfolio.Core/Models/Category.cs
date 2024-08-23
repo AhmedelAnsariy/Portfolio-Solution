@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 namespace Portfolio.Core.Models
 {
     public class Category : BaseClass
-    {
+    { 
         public string Name { get; set; }
-
         public ICollection<Design> Designs { get; set; }
-
-
     }
 }

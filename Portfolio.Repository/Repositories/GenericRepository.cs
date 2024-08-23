@@ -28,6 +28,19 @@ namespace Portfolio.Repository.Repositories
             //    var data = await _context.Set<Design>().Include(d => d.Category).ToListAsync();
             //    return data as List<T>;
             //}
+
+
+            //if (typeof(T) == typeof(Category))
+            //{
+            //    var data = await _context.Set<Category>().Include(d => d.Designs).ToListAsync();
+            //    return data as List<T>;
+            //}
+
+
+
+
+
+
             return await _context.Set<T>().ToListAsync();
         }
 

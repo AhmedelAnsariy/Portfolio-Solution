@@ -18,6 +18,14 @@ namespace Portfolio.API
 
 
             webApplicationbuilder.Services.AddControllers();
+
+
+
+           
+
+
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             webApplicationbuilder.Services.AddEndpointsApiExplorer();
             webApplicationbuilder.Services.AddSwaggerGen();
@@ -34,11 +42,15 @@ namespace Portfolio.API
             webApplicationbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             webApplicationbuilder.Services.AddAutoMapper(typeof(MappingProfiles));
 
+         
+
+
+
 
             webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
-         options.InvalidModelStateResponseFactory = (ActionContext context) =>
-         {
-        var errors = context.ModelState
+             options.InvalidModelStateResponseFactory = (ActionContext context) =>
+             {
+             var errors = context.ModelState
             .Where(p => p.Value.Errors.Any())
             .SelectMany(p => p.Value.Errors)
             .Select(e => e.ErrorMessage)
