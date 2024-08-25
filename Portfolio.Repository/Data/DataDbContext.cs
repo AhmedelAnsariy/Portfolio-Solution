@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Portfolio.Core.Identity;
 using Portfolio.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -9,23 +11,12 @@ using System.Threading.Tasks;
 
 namespace Portfolio.Repository.Data
 {
-    public class DataDbContext : DbContext
+    public class DataDbContext : IdentityDbContext<AppUser>
     {
-
-
         public DataDbContext(DbContextOptions<DataDbContext> options) : base(options)
         {
             
         }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -36,27 +27,11 @@ namespace Portfolio.Repository.Data
             base.OnModelCreating(modelBuilder);
         }
 
-
-
-
-
         public DbSet<Career> Careers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ClientReview> ClientReviews { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Design> Designs { get; set; }
         public DbSet<EvaluationMonthly> Evaluations { get; set; }
-
-
-
-
-
-
-
-
-       
-
-
-
     }
 }

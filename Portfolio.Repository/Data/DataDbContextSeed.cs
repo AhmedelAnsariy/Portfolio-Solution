@@ -1,4 +1,6 @@
-﻿using Portfolio.Core.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Portfolio.Core.Identity;
+using Portfolio.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace Portfolio.Repository.Data
 {
     public static  class DataDbContextSeed
     {
-        public static async Task SeedAsync(DataDbContext _context)
+        public static async Task SeedAsync(DataDbContext _context , UserManager<AppUser> _userManager)
         {
             if(_context.ClientReviews.Count() == 0)
             {
@@ -93,6 +95,19 @@ namespace Portfolio.Repository.Data
             }
 
 
+            if(_userManager.Users.Count() == 0)
+            {
+                var user = new AppUser()
+                {
+                    FName = "Zeyad",
+                    Email = "ZeyadMohamed30@admin.com",
+                    UserName = "ZeyadElsayed",
+                    PhoneNumber = "01065351945",
+                    Age = 21
+                };
+
+                await _userManager.CreateAsync(user, "ZeyadMohammed@12345!@#");
+            }
 
 
 

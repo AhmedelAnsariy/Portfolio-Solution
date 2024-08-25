@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.API.Errors;
 using Portfolio.API.Helper;
 using Portfolio.API.Middlewares;
+using Portfolio.Core.Identity;
 using Portfolio.Core.Interfaces;
 using Portfolio.Repository.Data;
 using Portfolio.Repository.Repositories;
@@ -66,20 +68,53 @@ namespace Portfolio.API
 
 
 
+            webApplicationbuilder.Services.AddIdentity<AppUser , IdentityRole>()
+                                           .AddEntityFrameworkStores<DataDbContext>()
+                                           .AddDefaultTokenProviders();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             var app = webApplicationbuilder.Build();
-
-
             using var scope = app.Services.CreateScope();
             var services = scope.ServiceProvider;
             var _context = services.GetRequiredService<DataDbContext>();
+            var userManager = services.GetRequiredService<UserManager<AppUser>>();
+
 
             var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 
             try
             {
                 await _context.Database.MigrateAsync();
-                await DataDbContextSeed.SeedAsync(_context);
+                await DataDbContextSeed.SeedAsync(_context, userManager);
             }
             catch (Exception ex)
             {
@@ -99,6 +134,8 @@ namespace Portfolio.API
             app.UseStaticFiles();
             app.UseHttpsRedirection();
 
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
