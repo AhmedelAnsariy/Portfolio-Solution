@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.33" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.33">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Repository\Portfolio.Repository.csproj" />
+    <ProjectReference Include="..\Portfolio.Service\Portfolio.Service.csproj" />
   </ItemGroup>
 
   <ItemGroup>

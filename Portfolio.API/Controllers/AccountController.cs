@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Portfolio.API.DTOS.Users;
 using Portfolio.API.Errors;
 using Portfolio.Core.Identity;
+using Portfolio.Core.Services.Interfaces;
 
 namespace Portfolio.API.Controllers
 {
@@ -13,11 +14,13 @@ namespace Portfolio.API.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ITokenService _tokenService;
 
-        public AccountController(UserManager<AppUser> userManager , SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager , SignInManager<AppUser> signInManager,ITokenService  tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
 
@@ -47,7 +50,7 @@ namespace Portfolio.API.Controllers
                 {
                     UserName = model.UserName,
                     UserEmail = model.Email,
-                    Token = "Token Will Be Here"
+                    Token =  await _tokenService.CreateTokenAsync(user , _userManager)
                 };
 
                 return Ok(response);
@@ -80,7 +83,7 @@ namespace Portfolio.API.Controllers
                 {
                     UserName = user.UserName,
                     UserEmail = user.Email,
-                    Token = "Token Will Be Here "
+                    Token = await _tokenService.CreateTokenAsync(user, _userManager)
                 };
 
                 return Ok(response);

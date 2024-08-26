@@ -1,13 +1,19 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Portfolio.API.Errors;
 using Portfolio.API.Helper;
 using Portfolio.API.Middlewares;
 using Portfolio.Core.Identity;
 using Portfolio.Core.Interfaces;
+using Portfolio.Core.Services.Interfaces;
 using Portfolio.Repository.Data;
 using Portfolio.Repository.Repositories;
+using Portfolio.Service;
+using System.Text;
 
 namespace Portfolio.API
 {
@@ -21,18 +27,9 @@ namespace Portfolio.API
 
             webApplicationbuilder.Services.AddControllers();
 
-
-
-           
-
-
-
-
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             webApplicationbuilder.Services.AddEndpointsApiExplorer();
             webApplicationbuilder.Services.AddSwaggerGen();
-
-
 
             webApplicationbuilder.Services.AddDbContext<DataDbContext>(options =>
             {
@@ -43,8 +40,95 @@ namespace Portfolio.API
             webApplicationbuilder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             webApplicationbuilder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             webApplicationbuilder.Services.AddAutoMapper(typeof(MappingProfiles));
+            webApplicationbuilder.Services.AddScoped<ITokenService, TokenService>();
 
-         
+
+
+            //webApplicationbuilder.Services.AddAuthentication(options =>
+            //{
+            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //                              .AddJwtBearer( options =>
+            //                              {
+            //                                  options.TokenValidationParameters = new TokenValidationParameters()
+            //                                  {
+            //                                      ValidateIssuer = true,
+            //                                      ValidIssuer = webApplicationbuilder.Configuration["JWT:ValidIssure"],
+            //                                      ValidateAudience = true,
+            //                                      ValidAudience = webApplicationbuilder.Configuration["JWT:ValidAudience"],
+            //                                      ValidateLifetime = true,
+            //                                      ValidateIssuerSigningKey = true,
+            //                                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(webApplicationbuilder.Configuration["JWT:Key"]))
+
+            //                                  };
+
+
+            //                              });
+
+
+
+
+            //            webApplicationbuilder.Services.AddAuthentication(options =>
+            //            {
+            //                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //            })
+            //.AddJwtBearer(options =>
+            //{
+            //    options.TokenValidationParameters = new TokenValidationParameters()
+            //    {
+            //        ValidateIssuer = true,
+            //        ValidIssuer = webApplicationbuilder.Configuration["JWT:ValidIssuer"], // Fixed typo here
+            //        ValidateAudience = true,
+            //        ValidAudience = webApplicationbuilder.Configuration["JWT:ValidAudience"],
+            //        ValidateLifetime = true,
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(webApplicationbuilder.Configuration["JWT:Key"]))
+            //    };
+            //});
+
+
+
+
+            webApplicationbuilder.Services.AddAuthentication(optoins =>
+            {
+                optoins.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                optoins.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                                                             .AddJwtBearer(options =>
+                                                             {
+                                                                 options.TokenValidationParameters = new TokenValidationParameters()
+                                                                 {
+                                                                     ValidateIssuer = true,
+                                                                     ValidIssuer = webApplicationbuilder.Configuration["JWT:ValidIssure"],
+                                                                     ValidateAudience = true,
+                                                                     ValidAudience = webApplicationbuilder.Configuration["JWT:ValidAudience"],
+                                                                     ValidateLifetime = true,
+                                                                     ValidateIssuerSigningKey = true,
+                                                                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(webApplicationbuilder.Configuration["JWT:Key"]))
+
+                                                                 };
+
+
+                                                             });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -71,8 +155,6 @@ namespace Portfolio.API
             webApplicationbuilder.Services.AddIdentity<AppUser , IdentityRole>()
                                            .AddEntityFrameworkStores<DataDbContext>()
                                            .AddDefaultTokenProviders();
-
-
 
 
 
