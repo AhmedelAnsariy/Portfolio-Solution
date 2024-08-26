@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,7 @@ using Portfolio.API.DTOS.Users;
 using Portfolio.API.Errors;
 using Portfolio.Core.Identity;
 using Portfolio.Core.Services.Interfaces;
+using System.Security.Claims;
 
 namespace Portfolio.API.Controllers
 {
@@ -137,6 +140,23 @@ namespace Portfolio.API.Controllers
         }
 
 
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("getCurrentUser")]
+        public async Task<ActionResult<UserResponseDTO>> GetCurrentUser()
+        {
+            var EmailUser = User.FindFirstValue(ClaimTypes.Email); // Cannot return null because he must be login and have token
+
+            var userData = await _userManager.FindByEmailAsync(EmailUser);
+
+            return Ok(new UserResponseDTO()
+            {
+                UserName = userData.UserName,
+                UserEmail = userData.Email,
+                Token = await _tokenService.CreateTokenAsync(userData, _userManager)
+            }
+            );
+        }
 
     }
 }
