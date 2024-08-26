@@ -44,49 +44,7 @@ namespace Portfolio.API
 
 
 
-            //webApplicationbuilder.Services.AddAuthentication(options =>
-            //{
-            //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //                              .AddJwtBearer( options =>
-            //                              {
-            //                                  options.TokenValidationParameters = new TokenValidationParameters()
-            //                                  {
-            //                                      ValidateIssuer = true,
-            //                                      ValidIssuer = webApplicationbuilder.Configuration["JWT:ValidIssure"],
-            //                                      ValidateAudience = true,
-            //                                      ValidAudience = webApplicationbuilder.Configuration["JWT:ValidAudience"],
-            //                                      ValidateLifetime = true,
-            //                                      ValidateIssuerSigningKey = true,
-            //                                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(webApplicationbuilder.Configuration["JWT:Key"]))
-
-            //                                  };
-
-
-            //                              });
-
-
-
-
-            //            webApplicationbuilder.Services.AddAuthentication(options =>
-            //            {
-            //                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //            })
-            //.AddJwtBearer(options =>
-            //{
-            //    options.TokenValidationParameters = new TokenValidationParameters()
-            //    {
-            //        ValidateIssuer = true,
-            //        ValidIssuer = webApplicationbuilder.Configuration["JWT:ValidIssuer"], // Fixed typo here
-            //        ValidateAudience = true,
-            //        ValidAudience = webApplicationbuilder.Configuration["JWT:ValidAudience"],
-            //        ValidateLifetime = true,
-            //        ValidateIssuerSigningKey = true,
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(webApplicationbuilder.Configuration["JWT:Key"]))
-            //    };
-            //});
+            
 
 
 
@@ -185,8 +143,12 @@ namespace Portfolio.API
 
 
             var app = webApplicationbuilder.Build();
+
+
             using var scope = app.Services.CreateScope();
             var services = scope.ServiceProvider;
+
+
             var _context = services.GetRequiredService<DataDbContext>();
             var userManager = services.GetRequiredService<UserManager<AppUser>>();
 
@@ -196,6 +158,7 @@ namespace Portfolio.API
             try
             {
                 await _context.Database.MigrateAsync();
+                await RoleSeeder.SeedRolesAsync(services);
                 await DataDbContextSeed.SeedAsync(_context, userManager);
             }
             catch (Exception ex)

@@ -29,7 +29,6 @@ namespace Portfolio.API.Controllers
         }
 
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<Design>>> GetAllDesing()
         {
@@ -80,6 +79,11 @@ namespace Portfolio.API.Controllers
         }
 
 
+
+
+
+
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<ActionResult> AddNewDesign([FromForm] DesignToAddDTO model)
         {
@@ -113,7 +117,7 @@ namespace Portfolio.API.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteDesign (int id)
         {

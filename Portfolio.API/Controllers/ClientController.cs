@@ -9,6 +9,8 @@ using Portfolio.API.DTOS.Client;
 using Portfolio.API.Helper;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Portfolio.API.Errors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Portfolio.API.Controllers
 {
@@ -45,8 +47,12 @@ namespace Portfolio.API.Controllers
         }
 
 
-      
 
+
+
+
+
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<IActionResult> AddNewDesign([FromForm] ClientToCreateDTO clientDto)
         {
@@ -82,6 +88,10 @@ namespace Portfolio.API.Controllers
 
 
 
+
+
+
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteClient(int id)
         {

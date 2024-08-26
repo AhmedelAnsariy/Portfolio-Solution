@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.API.DTOS.Category;
@@ -33,7 +35,7 @@ namespace Portfolio.API.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task<ActionResult> AddNewCategory(CategoryToAddDTO model)
         {
@@ -58,7 +60,7 @@ namespace Portfolio.API.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteOneCategory(int id)
         {

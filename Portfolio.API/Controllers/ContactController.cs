@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portfolio.API.DTOS;
@@ -23,7 +25,7 @@ namespace Portfolio.API.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<ContactToReturnDTO>>> GetAllMessages()
         {
@@ -65,7 +67,7 @@ namespace Portfolio.API.Controllers
             return BadRequest(new { status = 400, message = "Failed to send message" });
         }
 
-
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMessage(int id)
         {

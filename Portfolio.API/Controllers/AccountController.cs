@@ -27,6 +27,8 @@ namespace Portfolio.API.Controllers
         }
 
 
+
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("register")]
         public async Task<ActionResult<UserResponseDTO>> Register(RegistrationDTO model)
         {
@@ -49,6 +51,8 @@ namespace Portfolio.API.Controllers
 
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "Admin");
+
                 var response = new UserResponseDTO()
                 {
                     UserName = model.UserName,
@@ -98,6 +102,8 @@ namespace Portfolio.API.Controllers
         }
 
 
+
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ResponseAllUsers>>> GetAllUsers()
         {
@@ -116,7 +122,7 @@ namespace Portfolio.API.Controllers
 
 
 
-
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete]
         public async Task<IActionResult> DeleteUserByEmail(DeleteUserDTO model)
         {
@@ -141,7 +147,7 @@ namespace Portfolio.API.Controllers
 
 
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("getCurrentUser")]
         public async Task<ActionResult<UserResponseDTO>> GetCurrentUser()
         {

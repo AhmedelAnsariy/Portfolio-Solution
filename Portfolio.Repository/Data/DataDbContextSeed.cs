@@ -49,9 +49,6 @@ namespace Portfolio.Repository.Data
 
 
 
-
-
-
             if (_context.Designs.Count() == 0)
             {
                 var designs = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/designs.json");
@@ -107,6 +104,7 @@ namespace Portfolio.Repository.Data
                 };
 
                 await _userManager.CreateAsync(user, "ZeyadMohammed@12345!@#");
+                await _userManager.AddToRoleAsync(user, "Admin");
             }
 
 
