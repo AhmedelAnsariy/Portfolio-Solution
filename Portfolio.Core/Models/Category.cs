@@ -9,6 +9,10 @@ namespace Portfolio.Core.Models
     public class Category : BaseClass
     { 
         public string Name { get; set; }
+
+        public string? Code { get; set; }
+
+
         public ICollection<Design> Designs { get; set; }
     }
 }

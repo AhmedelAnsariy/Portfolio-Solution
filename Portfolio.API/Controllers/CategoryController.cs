@@ -64,9 +64,6 @@ namespace Portfolio.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteOneCategory(int id)
         {
-
-
-
             var oneCategory = await _unitOfWork.Repository<Category>().GetByIdAsync(id);
             if (oneCategory == null)
             {

@@ -1,14 +1,17 @@
 [
   {
-    "Name": "BVB"
+    "Name": "BVB",
+    "Code":"10"
   },
 
   {
-    "Name": "ATM"
+    "Name": "ATM",
+    "Code": "20"
   },
 
   {
-    "Name": "Flamengo"
+    "Name": "Flamengo",
+    "Code": "30"
   }
 
   
