@@ -92,12 +92,31 @@ namespace Portfolio.Repository.Data
             }
 
 
-            if(_userManager.Users.Count() == 0)
+
+            if (_context.Contacts.Count() == 0)
+            {
+                var contacts = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/contact.json");
+                var contactsData = JsonSerializer.Deserialize<List<Contact>>(contacts);
+
+
+
+
+                if (contactsData?.Count > 0)
+                {
+                    foreach (var cont in contactsData)
+                    {
+                        _context.Set<Contact>().Add(cont);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            if (_userManager.Users.Count() == 0)
             {
                 var user = new AppUser()
                 {
                     FName = "Zeyad",
-                    Email = "ZeyadMohamed30@admin.com",
+                    Email = "ZeyadMohamed30@admin.comZH",
                     UserName = "ZeyadElsayed",
                     PhoneNumber = "01065351945",
                     Age = 21
@@ -107,7 +126,7 @@ namespace Portfolio.Repository.Data
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
 
-
+            
 
 
 

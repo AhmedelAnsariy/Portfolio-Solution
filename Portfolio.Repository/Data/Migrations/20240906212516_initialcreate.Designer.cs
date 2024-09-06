@@ -12,7 +12,7 @@ using Portfolio.Repository.Data;
 namespace Portfolio.Repository.Data.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20240827162803_initialcreate")]
+    [Migration("20240906212516_initialcreate")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

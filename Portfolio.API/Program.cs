@@ -71,26 +71,6 @@ namespace Portfolio.API
 
                                                              });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             webApplicationbuilder.Services.Configure<ApiBehaviorOptions>(options =>
              options.InvalidModelStateResponseFactory = (ActionContext context) =>
              {
@@ -119,27 +99,15 @@ namespace Portfolio.API
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            webApplicationbuilder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
 
             var app = webApplicationbuilder.Build();
@@ -174,7 +142,10 @@ namespace Portfolio.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            } 
+            }
+
+            app.UseCors();
+
             app.UseStatusCodePagesWithReExecute("/errors/{0}");  //For Not Found End Point 
             app.UseStaticFiles();
             app.UseHttpsRedirection();
