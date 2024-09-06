@@ -21,11 +21,6 @@ namespace Portfolio.Repository.Repositories
             _repositories = new Hashtable();
         }
 
-
-
-
-
-
         public async Task<int> CompleteAsync()
         {
             return await _context.SaveChangesAsync();
@@ -35,11 +30,6 @@ namespace Portfolio.Repository.Repositories
         {
             await _context.DisposeAsync();
         }
-
-
-
-
-
 
         public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseClass
         {

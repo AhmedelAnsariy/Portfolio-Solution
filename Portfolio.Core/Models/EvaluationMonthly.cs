@@ -14,10 +14,12 @@ namespace Portfolio.Core.Models
         public string PersonName { get; set; }
         public string Company { get; set; }
         public string Phone { get; set; }
-        public string Rate { get; set; }
 
-       public string? BackupQuestion { get; set; }
-       public string Description { get; set; }
+
+
+        public string Rate { get; set; }
+        public string? BackupQuestion { get; set; }
+        public string Description { get; set; }
 
 
 
