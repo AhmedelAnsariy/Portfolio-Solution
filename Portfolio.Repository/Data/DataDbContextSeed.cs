@@ -116,7 +116,7 @@ namespace Portfolio.Repository.Data
                 var user = new AppUser()
                 {
                     FName = "Zeyad",
-                    Email = "ZeyadMohamed30@admin.comZH",
+                    Email = "ZeyadMohamed30@adminZH.com",
                     UserName = "ZeyadElsayed",
                     PhoneNumber = "01065351945",
                     Age = 21

@@ -8,6 +8,7 @@ using Portfolio.API.DTOS.Users;
 using Portfolio.API.Errors;
 using Portfolio.Core.Identity;
 using Portfolio.Core.Services.Interfaces;
+using System.Data;
 using System.Security.Claims;
 
 namespace Portfolio.API.Controllers
@@ -53,11 +54,13 @@ namespace Portfolio.API.Controllers
             {
                 await _userManager.AddToRoleAsync(user, "Admin");
 
-                var response = new UserResponseDTO()
+            
+               var response = new UserResponseDTO()
                 {
                     UserName = model.UserName,
                     UserEmail = model.Email,
-                    Token =  await _tokenService.CreateTokenAsync(user , _userManager)
+                    Token =  await _tokenService.CreateTokenAsync(user , _userManager),
+                    
                 };
 
                 return Ok(response);
@@ -68,8 +71,6 @@ namespace Portfolio.API.Controllers
                 return BadRequest(new ApiResponse(400, string.Join(", ", errors)));
             }
         }
-
-
 
 
         [HttpPost("login")]
@@ -86,10 +87,15 @@ namespace Portfolio.API.Controllers
 
             if (result.Succeeded)
             {
+                var roles = await _userManager.GetRolesAsync(user);
+                var role = roles.FirstOrDefault(); // Assuming a user has one role
+
+
                 var response = new UserResponseDTO()
                 {
                     UserName = user.UserName,
                     UserEmail = user.Email,
+                    Role = role,
                     Token = await _tokenService.CreateTokenAsync(user, _userManager)
                 };
 
@@ -100,7 +106,6 @@ namespace Portfolio.API.Controllers
                 return Unauthorized(new ApiResponse(401, "Invalid Email or Password"));
             }
         }
-
 
 
         [Authorize(Roles = "Admin", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

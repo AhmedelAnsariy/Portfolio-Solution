@@ -1,32 +1,25 @@
 [
   {
     "Name": "Bvb 1",
-    "PictureUrl": "images/Designs/b1.jpeg",
-    "CategoryId": 1
-  },
-
-
-  {
-    "Name": "Bvb 2",
     "PictureUrl": "images/Designs/b2.jpeg",
     "CategoryId": 1
   },
 
   {
-    "Name": "Bvb 3",
+    "Name": "Bvb 2",
     "PictureUrl": "images/Designs/b3.png",
     "CategoryId": 1
   },
 
 
   {
-    "Name": "Bvb 4",
+    "Name": "Bvb 3",
     "PictureUrl": "images/Designs/b4.png",
     "CategoryId": 1
   },
 
   {
-    "Name": "Bvb 5",
+    "Name": "Bvb 4",
     "PictureUrl": "images/Designs/b5.png",
     "CategoryId": 1
   },
