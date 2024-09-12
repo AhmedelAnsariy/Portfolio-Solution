@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Portfolio.API.DTOS;
 using Portfolio.API.DTOS.Category;
+using Portfolio.API.DTOS.Designs;
 using Portfolio.API.Errors;
 using Portfolio.API.Helper;
 using Portfolio.Core.Interfaces;
@@ -30,7 +32,19 @@ namespace Portfolio.API.Controllers
         public async Task<ActionResult<IReadOnlyList<CategoryToReturnDto>>> GetAllCategories()
         {
             var data = await _unitOfWork.Repository<Category>().GetAllAsync();
-            return Ok(data);
+
+
+
+            var mappedData = _mapper.Map<IReadOnlyList<Category>, IReadOnlyList<CategoryToReturnDto>>(data);
+
+
+            var response = new PagedResponse<CategoryToReturnDto>
+            {
+                Data = mappedData,
+                TotalCount = mappedData.Count
+            };
+            return Ok(response);
+            
 
         }
 

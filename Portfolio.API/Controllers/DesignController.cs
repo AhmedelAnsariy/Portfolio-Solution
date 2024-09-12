@@ -129,15 +129,15 @@ namespace Portfolio.API.Controllers
                     return NotFound(new { message = "Design not found." });
                 }
 
-                string imageFileName = Path.GetFileName(design.PictureUrl);
-                var imagePath = Path.Combine("wwwroot/images/Designs", imageFileName);
-                var fileHelper = new FileHelper();
-                var isDeleted = fileHelper.DeleteDocument(imagePath);
+                //string imageFileName = Path.GetFileName(design.PictureUrl);
+                //var imagePath = Path.Combine("wwwroot/images/Designs", imageFileName);
+                //var fileHelper = new FileHelper();
+                //var isDeleted = fileHelper.DeleteDocument(imagePath);
 
-                if (!isDeleted)
-                {
-                    return StatusCode(500, "An error occurred while deleting the client's image. Please check the server logs for details.");
-                }
+                //if (!isDeleted)
+                //{
+                //    return StatusCode(500, "An error occurred while deleting the Design  image. Please check the server logs for details.");
+                //}
 
 
                 _unitOfWork.Repository<Design>().Delete(design);

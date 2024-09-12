@@ -30,6 +30,7 @@ namespace Portfolio.API.Helper
 
 
             CreateMap<CategoryToAddDTO, Category>();
+            CreateMap<CategoryToReturnDto, Category>().ReverseMap();
 
 
 
@@ -37,14 +38,15 @@ namespace Portfolio.API.Helper
             CreateMap<DesignToAddDTO,Design>()
                 .ForMember(dest =>dest.PictureUrl, opt => opt.Ignore());
 
-            CreateMap<ContactDTO,Contact>().ReverseMap();
 
+
+
+            CreateMap<ContactDTO,Contact>().ReverseMap();
             CreateMap<Contact, ContactToReturnDTO>();
 
 
 
             CreateMap<Career, CareerDTO>().ReverseMap();
-
             CreateMap<Career, CareerToReturnDTO>(); ;
 
 
