@@ -98,20 +98,22 @@ namespace Portfolio.API.Controllers
 
 
             var oneClient = await _unitOfWork.Repository<ClientReview>().GetByIdAsync(id);  
+
+
             if (oneClient == null)
             {
                 return NotFound(new ApiResponse(404, "There is no client with this ID"));
             }
 
-            string imageFileName = Path.GetFileName(oneClient.PictureUrl); 
-            var imagePath = Path.Combine("wwwroot/images/clients", imageFileName);
-            var fileHelper = new FileHelper();
-            var isDeleted = fileHelper.DeleteDocument(imagePath);
+            //string imageFileName = Path.GetFileName(oneClient.PictureUrl); 
+            //var imagePath = Path.Combine("wwwroot/images/clients", imageFileName);
+            //var fileHelper = new FileHelper();
+            //var isDeleted = fileHelper.DeleteDocument(imagePath);
 
-            if (!isDeleted)
-            {
-                return StatusCode(500, "An error occurred while deleting the client's image. Please check the server logs for details.");
-            }
+            //if (!isDeleted)
+            //{
+            //    return StatusCode(500, "An error occurred while deleting the client's image. Please check the server logs for details.");
+            //}
 
 
             _unitOfWork.Repository<ClientReview>().Delete(oneClient);

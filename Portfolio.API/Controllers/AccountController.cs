@@ -160,10 +160,15 @@ namespace Portfolio.API.Controllers
 
             var userData = await _userManager.FindByEmailAsync(EmailUser);
 
+
+            var roles = await _userManager.GetRolesAsync(userData);
+            var role = roles.FirstOrDefault(); // Assuming a user has one role
+
             return Ok(new UserResponseDTO()
             {
                 UserName = userData.UserName,
                 UserEmail = userData.Email,
+                Role = role,
                 Token = await _tokenService.CreateTokenAsync(userData, _userManager)
             }
             );
