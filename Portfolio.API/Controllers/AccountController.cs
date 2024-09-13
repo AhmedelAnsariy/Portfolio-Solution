@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Portfolio.API.DTOS.Designs;
+using Portfolio.API.DTOS;
 using Portfolio.API.DTOS.Users;
 using Portfolio.API.Errors;
 using Portfolio.Core.Identity;
@@ -54,11 +56,14 @@ namespace Portfolio.API.Controllers
             {
                 await _userManager.AddToRoleAsync(user, "Admin");
 
-            
-               var response = new UserResponseDTO()
+                var roles = await _userManager.GetRolesAsync(user);
+                var role = roles.FirstOrDefault(); // Assuming a user has one role
+
+                var response = new UserResponseDTO()
                 {
                     UserName = model.UserName,
                     UserEmail = model.Email,
+                    Role = role,
                     Token =  await _tokenService.CreateTokenAsync(user , _userManager),
                     
                 };
@@ -122,7 +127,17 @@ namespace Portfolio.API.Controllers
                 
             }).ToList();
 
-            return Ok(userResponseList);
+
+            var response = new PagedResponse<ResponseAllUsers>
+            {
+                Data = userResponseList,
+                TotalCount = userResponseList.Count
+            };
+            return Ok(response);
+
+
+
+
         }
 
 
