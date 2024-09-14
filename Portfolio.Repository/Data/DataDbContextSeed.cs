@@ -53,17 +53,12 @@ namespace Portfolio.Repository.Data
             {
                 var designs = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/designs.json");
 
-
-
-
                 var designsData = JsonSerializer.Deserialize<List<Design>>(designs);
-
-
 
 
                 if (designsData?.Count > 0)
                 {
-                    foreach (var  des in designsData)
+                    foreach (var des in designsData)
                     {
                         _context.Set<Design>().Add(des);
                     }
@@ -73,7 +68,8 @@ namespace Portfolio.Repository.Data
 
 
 
-            if(_context.Careers.Count() == 0)
+
+            if (_context.Careers.Count() == 0)
             {
                 var careers = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/career.json");
                 var careerData = JsonSerializer.Deserialize<List<Career>>(careers);
