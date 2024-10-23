@@ -25,11 +25,12 @@ namespace Portfolio.Repository.Data
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Career> Careers { get; set; }
+        
         public DbSet<Category> Categories { get; set; }
         public DbSet<ClientReview> ClientReviews { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Design> Designs { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<EvaluationMonthly> Evaluations { get; set; }
     }
 }

@@ -6,7 +6,7 @@
 
         public string UserEmail { get; set; }
 
-        public string? Role { get; set; }  // New property to include the role
+        public string? Role { get; set; }  
 
         public string Token { get; set; }
 

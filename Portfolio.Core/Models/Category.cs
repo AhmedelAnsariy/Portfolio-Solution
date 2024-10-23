@@ -10,7 +10,6 @@ namespace Portfolio.Core.Models
     { 
         public string Name { get; set; }
 
-        public string? Code { get; set; }
 
 
         public ICollection<Design> Designs { get; set; }

@@ -45,7 +45,6 @@ namespace Portfolio.API.Controllers
             {
                 Email = model.Email,
                 PhoneNumber = model.PhoneNumber,
-                Age = model.Age,
                 UserName = model.UserName,
                 FName = model.FName
             };

@@ -30,6 +30,26 @@ namespace Portfolio.Repository.Data
             }
 
 
+
+
+            if (_context.TeamMembers.Count() == 0)
+            {
+                var team = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/team.json");
+                var TeamData = JsonSerializer.Deserialize<List<TeamMember>>(team);
+
+                if (TeamData?.Count > 0)
+                {
+                    foreach (var teammemebr in TeamData)
+                    {
+                        _context.Set<TeamMember>().Add(teammemebr);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+
+
+
             if (_context.Categories.Count() == 0)
             {
                 var categories = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/category.json");
@@ -69,23 +89,7 @@ namespace Portfolio.Repository.Data
 
 
 
-            if (_context.Careers.Count() == 0)
-            {
-                var careers = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/career.json");
-                var careerData = JsonSerializer.Deserialize<List<Career>>(careers);
-
-
-
-
-                if (careerData?.Count > 0)
-                {
-                    foreach (var car in careerData)
-                    {
-                        _context.Set<Career>().Add(car);
-                    }
-                    await _context.SaveChangesAsync();
-                }
-            }
+          
 
 
 
@@ -111,14 +115,14 @@ namespace Portfolio.Repository.Data
             {
                 var user = new AppUser()
                 {
-                    FName = "Zeyad",
-                    Email = "ZeyadMohamed30@adminZH.com",
-                    UserName = "ZeyadElsayed",
-                    PhoneNumber = "01065351945",
-                    Age = 21
+                    FName = "Mohame",
+                    Email = "MohameKamal@adminDKK.com",
+                    UserName = "MohameKamal",
+                    PhoneNumber = "01065351945"
+                   
                 };
 
-                await _userManager.CreateAsync(user, "ZeyadMohammed@12345!@#");
+                await _userManager.CreateAsync(user, "Mohamed_Kamal@12345!@#");
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
 

@@ -10,7 +10,7 @@ namespace Portfolio.Core.Identity
     public class AppUser : IdentityUser
     {
         public string? FName { get; set; }
-        public int Age { get; set; }
+       
 
     }
 }

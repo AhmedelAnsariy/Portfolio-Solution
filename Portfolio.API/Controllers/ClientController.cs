@@ -17,6 +17,7 @@ namespace Portfolio.API.Controllers
     
     public class ClientController :  APIBaseController
     {
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _environment;
@@ -130,26 +131,6 @@ namespace Portfolio.API.Controllers
 
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

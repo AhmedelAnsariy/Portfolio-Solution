@@ -7,7 +7,7 @@ namespace Portfolio.API.DTOS.Users
 
 
         [Required]
-        [RegularExpression(@".*@adminZH\.com$", ErrorMessage = "Invalid email or password")]
+        [RegularExpression(@".*@adminDKK\.com$", ErrorMessage = "Invalid email or password")]
         public string Email { get; set; }
 
 

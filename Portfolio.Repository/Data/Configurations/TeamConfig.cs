@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace Portfolio.Repository.Data.Configurations
 {
-    public class CareerConfig : IEntityTypeConfiguration<Career>
+    public class TeamConfig : IEntityTypeConfiguration<TeamMember>
     {
-        public void Configure(EntityTypeBuilder<Career> builder)
+        public void Configure(EntityTypeBuilder<TeamMember> builder)
         {
-            builder.Property(C => C.Date).IsRequired();
-            builder.Property(C => C.CompanyName).IsRequired();
-            builder.Property(C => C.Description).IsRequired();
-
-
+            builder.Property(cl => cl.Name).IsRequired();
+            builder.Property(cl => cl.Position).IsRequired();
+            builder.Property(cl => cl.PictureUrl).IsRequired();
         }
     }
 }
