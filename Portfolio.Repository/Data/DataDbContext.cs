@@ -19,8 +19,6 @@ namespace Portfolio.Repository.Data
         }
 
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
