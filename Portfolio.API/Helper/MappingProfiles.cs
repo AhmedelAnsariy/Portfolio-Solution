@@ -50,9 +50,13 @@ namespace Portfolio.API.Helper
                 .ForMember(t => t.PictureUrl, o => o.MapFrom<TeamUrlResolver>());
 
 
+            CreateMap<TeamToCreateDTO, TeamMember>()
+           .ForMember(dest => dest.PictureUrl, opt => opt.Ignore());
 
 
-            
+
+
+
 
 
 
