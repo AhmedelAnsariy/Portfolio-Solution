@@ -87,9 +87,28 @@ namespace Portfolio.Repository.Data
             }
 
 
+            if (_context.Sponsprs.Count() == 0)
+            {
+                var sponsors = File.ReadAllText("../Portfolio.Repository/Data/DataSeed/sponsor.json");
+
+                var sponsorsData = JsonSerializer.Deserialize<List<Sponspr>>(sponsors);
 
 
-          
+                if (sponsorsData?.Count > 0)
+                {
+                    foreach (var spon in sponsorsData)
+                    {
+                        _context.Set<Sponspr>().Add(spon);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+
+
+
+
+
 
 
 

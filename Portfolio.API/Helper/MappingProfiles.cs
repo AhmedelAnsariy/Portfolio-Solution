@@ -3,6 +3,7 @@ using Portfolio.API.DTOS.Category;
 using Portfolio.API.DTOS.Client;
 using Portfolio.API.DTOS.Contact;
 using Portfolio.API.DTOS.Designs;
+using Portfolio.API.DTOS.Sponsor;
 using Portfolio.API.DTOS.Team;
 using Portfolio.Core.Models;
 
@@ -51,7 +52,24 @@ namespace Portfolio.API.Helper
 
 
             CreateMap<TeamToCreateDTO, TeamMember>()
-           .ForMember(dest => dest.PictureUrl, opt => opt.Ignore());
+         .ForMember(dest => dest.PictureUrl, opt => opt.Ignore());
+ 
+
+
+            CreateMap<Sponspr, SponsorToReturnDTO>()
+               .ForMember(t => t.PictureUrl, o => o.MapFrom<SponsorUrlResolver>());
+
+
+
+            CreateMap<SponsorToCreateDTO, Sponspr>()
+       .ForMember(dest => dest.PictureUrl, opt => opt.Ignore());
+
+
+
+
+
+
+
 
 
 

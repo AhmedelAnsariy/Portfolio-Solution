@@ -12,7 +12,7 @@ using Portfolio.Repository.Data;
 namespace Portfolio.Repository.Data.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20241023065826_initialcreate")]
+    [Migration("20241103182830_initialcreate")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -373,6 +373,26 @@ namespace Portfolio.Repository.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Evaluations");
+                });
+
+            modelBuilder.Entity("Portfolio.Core.Models.Sponspr", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sponsprs");
                 });
 
             modelBuilder.Entity("Portfolio.Core.Models.TeamMember", b =>

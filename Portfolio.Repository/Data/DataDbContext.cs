@@ -31,6 +31,7 @@ namespace Portfolio.Repository.Data
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Design> Designs { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<Sponspr> Sponsprs { get; set; }
         public DbSet<EvaluationMonthly> Evaluations { get; set; }
     }
 }

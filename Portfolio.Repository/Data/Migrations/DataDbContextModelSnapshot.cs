@@ -373,6 +373,26 @@ namespace Portfolio.Repository.Data.Migrations
                     b.ToTable("Evaluations");
                 });
 
+            modelBuilder.Entity("Portfolio.Core.Models.Sponspr", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sponsprs");
+                });
+
             modelBuilder.Entity("Portfolio.Core.Models.TeamMember", b =>
                 {
                     b.Property<int>("Id")
